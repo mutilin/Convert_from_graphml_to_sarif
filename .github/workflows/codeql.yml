@@ -1,0 +1,25 @@
+name: Visualize SARIF file
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+  id-token: write
+  checks: write
+
+on:
+  push:
+    branches:
+      - converter
+
+jobs:
+  visualize-sarif:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Visualize SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: result.sarif
