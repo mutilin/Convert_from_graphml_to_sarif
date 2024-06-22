@@ -85,6 +85,7 @@ def convert_to_sarif(nodes, edges, specification=None):
             violation_node = node_id
 
     for source, target, data in edges:
+        locations = []
 
         rule_id = ""
 
@@ -108,78 +109,78 @@ def convert_to_sarif(nodes, edges, specification=None):
             if new_rule not in runs["tool"]["driver"]["rules"]:
                 runs["tool"]["driver"]["rules"].append(new_rule)
 
-
-        if 'enterFunction' in data or 'returnFromFunction' in data:
-            locations = []
-
-            if 'sourcecode' in data:
-                locations.append({
-                    "physicalLocation": {
-                        "artifactLocation": {
-                            "uri": data.get('originfile')
-                        },
-                        "region": {
-                            "startLine": int(data.get('startline', 0)),
-                            "endLine": int(data.get('endline', 0)),
-                            "startColumn": int(data.get('startoffset', 0)),
-                            "endColumn": int(data.get('endoffset', 0)),
-                        }
+        if 'assumption' in data:
+            assumption = data['assumption']
+            locations.append({
+                "physicalLocation": {
+                    "artifactLocation": {
+                        "uri": data.get('originfile')
+                    },
+                    "region": {
+                        "startLine": int(data.get('startline', 0)),
+                        "endLine": int(data.get('endline', 0)),
+                        "startColumn": int(data.get('startoffset', 0)),
+                        "endColumn": int(data.get('endoffset', 0)),
+                    },
+                    "message": {
+                        "text": assumption
                     }
-                })
-
-            if 'assumption' in data:
-                assumption = data['assumption']
-                locations.append({
-                    "physicalLocation": {
-                        "artifactLocation": {
-                            "uri": data.get('originfile')
-                        },
-                        "region": {
-                            "startLine": int(data.get('startline', 0)),
-                            "endLine": int(data.get('endline', 0)),
-                            "startColumn": int(data.get('startoffset', 0)),
-                            "endColumn": int(data.get('endoffset', 0)),
-                        },
-                        "message": {
-                            "text": assumption
-                        }
+                }
+            })
+        else:
+            locations.append({
+                "physicalLocation": {
+                    "artifactLocation": {
+                        "uri": data.get('originfile')
+                    },
+                    "region": {
+                        "startLine": int(data.get('startline', 0)),
+                        "endLine": int(data.get('endline', 0)),
+                        "startColumn": int(data.get('startoffset', 0)),
+                        "endColumn": int(data.get('endoffset', 0)),
                     }
-                })
+                }
+            })
 
-            thread_flows = []
-            thread_flows.append({
-                "locations": [
-                    {
-                        "location": {
-                            "physicalLocation": {
-                                "artifactLocation": {
-                                    "uri": data.get('originfile')
-                                },
-                                "region": {
-                                    "startLine": int(data.get('startline', 0)),
-                                    "endLine": int(data.get('endline', 0)),
-                                    "startColumn": int(data.get('startoffset', 0)),
-                                    "endColumn": int(data.get('endoffset', 0)),
-                                }
+        thread_flows = []
+        thread_flows.append({
+            "locations": [
+                {
+                    "location": {
+                        "physicalLocation": {
+                            "artifactLocation": {
+                                "uri": data.get('originfile')
+                            },
+                            "region": {
+                                "startLine": int(data.get('startline', 0)),
+                                "endLine": int(data.get('endline', 0)),
+                                "startColumn": int(data.get('startoffset', 0)),
+                                "endColumn": int(data.get('endoffset', 0)),
                             }
                         }
+                    },
+                    "threadFlowLocation": {
+                        "kinds": ["function"] if 'enterFunction' in data else [],
+                        "executionOrder": int(data.get('executionOrder', 0))
+                    }
+                }
+            ]
+        })
+        #sarif['runs'][0]['results']['codeFlows'][0]['threadFlows'][0]['locations'].append(thread_flow_location)
+
+        for run in runs:
+            run["results"].append({
+                "ruleId": rule_id,
+                "message": {
+                    "text": "Example error trace converted from GraphML"
+                },
+                "locations": locations,
+                "codeFlows": [
+                    {
+                        "threadFlows": thread_flows
                     }
                 ]
             })
-
-            for run in runs:
-                run["results"].append({
-                    "ruleId": rule_id,
-                    "message": {
-                        "text": "Example error trace converted from GraphML"
-                    },
-                    "locations": locations,
-                    "codeFlows": [
-                        {
-                            "threadFlows": thread_flows
-                        }
-                    ]
-                })
 
     sarif_log = {
         "version": "2.1.0",
