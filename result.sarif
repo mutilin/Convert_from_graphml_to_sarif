@@ -1,197 +1,65 @@
 {
-  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
   "version": "2.1.0",
   "runs": [
     {
       "tool": {
         "driver": {
-          "name": "Tool Name",
-          "semanticVersion": "2.0.0",
-          "rules": [
-            {
-              "id": "3f292041e51d22005ce48f39df3585d44ce1b0ad",
-              "name": "js/unused-local-variable",
-              "shortDescription": {
-                "text": "Unused variable, import, function or class"
-              },
-              "fullDescription": {
-                "text": "Unused variables, imports, functions or classes may be a symptom of a bug and should be examined carefully."
-              },
-              "defaultConfiguration": {
-                "level": "note"
-              },
-              "properties": {
-                "tags": [
-                  "maintainability"
-                ],
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "d5b664aefd5ca4b21b52fdc1d744d7d6ab6886d0",
-              "name": "js/inconsistent-use-of-new",
-              "shortDescription": {
-                "text": "Inconsistent use of 'new'"
-              },
-              "fullDescription": {
-                "text": "If a function is intended to be a constructor, it should always be invoked with 'new'. Otherwise, it should always be invoked as a normal function, that is, without 'new'."
-              },
-              "properties": {
-                "tags": [
-                  "reliability",
-                  "correctness",
-                  "language-features"
-                ],
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "R01"
-            }
-          ]
+          "name": "SV-COMP Witness Converter",
+          "version": "2.1.0",
+          "informationUri": "https://github.com/sosy-lab/sv-witnesses",
+          "rules": []
         }
-      },
-      "automationDetails": {
-        "id": "my-category/"
       },
       "results": [
         {
-          "ruleId": "3f292041e51d22005ce48f39df3585d44ce1b0ad",
-          "ruleIndex": 0,
+          "ruleId": "",
           "message": {
-            "text": "Unused variable foo."
+            "text": "Example error trace converted from GraphML"
           },
-          "locations": [
+          "locations": [],
+          "codeFlows": [
             {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "main.js",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 2,
-                  "startColumn": 7,
-                  "endColumn": 10
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13730,
+                            "endLine": 13730,
+                            "startColumn": 534534,
+                            "endColumn": 534544
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "primaryLocationLineHash": "39fa2ee980eb94b0:1",
-            "primaryLocationStartColumnFingerprint": "4"
-          }
-        },
-        {
-          "ruleId": "d5b664aefd5ca4b21b52fdc1d744d7d6ab6886d0",
-          "ruleIndex": 1,
-          "message": {
-            "text": "Function resolvingPromise is sometimes invoked as a constructor (for example [here](1)), and sometimes as a normal function (for example [here](2))."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "src/promises.js",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 2
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "primaryLocationLineHash": "5061c3315a741b7d:1",
-            "primaryLocationStartColumnFingerprint": "7"
-          },
-          "relatedLocations": [
-            {
-              "id": 1,
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "src/ParseObject.js",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 2281,
-                  "startColumn": 33,
-                  "endColumn": 55
-                }
-              },
-              "message": {
-                "text": "here"
-              }
-            },
-            {
-              "id": 2,
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "src/LiveQueryClient.js",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 166
-                }
-              },
-              "message": {
-                "text": "here"
-              }
+              ]
             }
           ]
         },
         {
-          "ruleId": "R01",
+          "ruleId": "",
           "message": {
-            "text": "Specifying both [ruleIndex](1) and [ruleID](2) might lead to inconsistencies."
+            "text": "Example error trace converted from GraphML"
           },
-          "level": "error",
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "full.sarif",
-                  "uriBaseId": "%SRCROOT%"
+                  "uri": "./cil.i"
                 },
                 "region": {
-                  "startLine": 54,
-                  "startColumn": 10,
-                  "endLine": 55,
-                  "endColumn": 25
+                  "startLine": 13735,
+                  "endLine": 13735,
+                  "startColumn": 534599,
+                  "endColumn": 534630
                 }
-              }
-            }
-          ],
-          "relatedLocations": [
-            {
-              "id": 1,
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "full.sarif"
-                },
-                "region": {
-                  "startLine": 81,
-                  "startColumn": 10,
-                  "endColumn": 18
-                }
-              },
-              "message": {
-                "text": "here"
-              }
-            },
-            {
-              "id": 2,
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "full.sarif"
-                },
-                "region": {
-                  "startLine": 82,
-                  "startColumn": 10,
-                  "endColumn": 21
-                }
-              },
-              "message": {
-                "text": "here"
               }
             }
           ],
@@ -203,33 +71,14 @@
                     {
                       "location": {
                         "physicalLocation": {
-                          "region": {
-                            "startLine": 11,
-                            "endLine": 29,
-                            "startColumn": 10,
-                            "endColumn": 18
-                          },
                           "artifactLocation": {
-                            "uriBaseId": "%SRCROOT%",
-                            "uri": "full.sarif"
-                          }
-                        },
-                        "message": {
-                          "text": "Rule has index 0"
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "region": {
-                            "endColumn": 47,
-                            "startColumn": 12,
-                            "startLine": 12
+                            "uri": "./cil.i"
                           },
-                          "artifactLocation": {
-                            "uriBaseId": "%SRCROOT%",
-                            "uri": "full.sarif"
+                          "region": {
+                            "startLine": 13735,
+                            "endLine": 13735,
+                            "startColumn": 534599,
+                            "endColumn": 534630
                           }
                         }
                       }
@@ -238,13 +87,2539 @@
                 }
               ]
             }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13712,
+                  "endLine": 13712,
+                  "startColumn": 534055,
+                  "endColumn": 534075
+                }
+              }
+            }
           ],
-          "partialFingerprints": {
-            "primaryLocationLineHash": "ABC:2"
-          }
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13712,
+                            "endLine": 13712,
+                            "startColumn": 534055,
+                            "endColumn": 534075
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11477,
+                  "endLine": 11477,
+                  "startColumn": 456863,
+                  "endColumn": 456879
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11477,
+                            "endLine": 11477,
+                            "startColumn": 456863,
+                            "endColumn": 456879
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11395,
+                  "endLine": 11395,
+                  "startColumn": 453925,
+                  "endColumn": 453998
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11395,
+                            "endLine": 11395,
+                            "startColumn": 453925,
+                            "endColumn": 453998
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11576,
+                  "endLine": 11578,
+                  "startColumn": 460374,
+                  "endColumn": 460522
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11576,
+                            "endLine": 11578,
+                            "startColumn": 460374,
+                            "endColumn": 460522
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13605,
+                  "endLine": 13605,
+                  "startColumn": 531170,
+                  "endColumn": 531184
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13605,
+                            "endLine": 13605,
+                            "startColumn": 531170,
+                            "endColumn": 531184
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13607,
+                  "endLine": 13607,
+                  "startColumn": 531249,
+                  "endColumn": 531267
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13607,
+                            "endLine": 13607,
+                            "startColumn": 531249,
+                            "endColumn": 531267
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13291,
+                  "endLine": 13291,
+                  "startColumn": 522027,
+                  "endColumn": 522053
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13291,
+                            "endLine": 13291,
+                            "startColumn": 522027,
+                            "endColumn": 522053
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13293,
+                  "endLine": 13293,
+                  "startColumn": 522074,
+                  "endColumn": 522088
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13293,
+                            "endLine": 13293,
+                            "startColumn": 522074,
+                            "endColumn": 522088
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11401,
+                  "endLine": 11401,
+                  "startColumn": 454182,
+                  "endColumn": 454209
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11401,
+                            "endLine": 11401,
+                            "startColumn": 454182,
+                            "endColumn": 454209
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11585,
+                  "endLine": 11585,
+                  "startColumn": 460772,
+                  "endColumn": 460795
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11585,
+                            "endLine": 11585,
+                            "startColumn": 460772,
+                            "endColumn": 460795
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13656,
+                  "endLine": 13656,
+                  "startColumn": 532655,
+                  "endColumn": 532669
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13656,
+                            "endLine": 13656,
+                            "startColumn": 532655,
+                            "endColumn": 532669
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13658,
+                  "endLine": 13658,
+                  "startColumn": 532699,
+                  "endColumn": 532713
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13658,
+                            "endLine": 13658,
+                            "startColumn": 532699,
+                            "endColumn": 532713
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13660,
+                  "endLine": 13660,
+                  "startColumn": 532735,
+                  "endColumn": 532749
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13660,
+                            "endLine": 13660,
+                            "startColumn": 532735,
+                            "endColumn": 532749
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13664,
+                  "endLine": 13664,
+                  "startColumn": 532830,
+                  "endColumn": 532863
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13664,
+                            "endLine": 13664,
+                            "startColumn": 532830,
+                            "endColumn": 532863
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11454,
+                  "endLine": 11454,
+                  "startColumn": 456053,
+                  "endColumn": 456066
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11454,
+                            "endLine": 11454,
+                            "startColumn": 456053,
+                            "endColumn": 456066
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 10780,
+                  "endLine": 10780,
+                  "startColumn": 436450,
+                  "endColumn": 436465
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 10780,
+                            "endLine": 10780,
+                            "startColumn": 436450,
+                            "endColumn": 436465
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13666,
+                  "endLine": 13666,
+                  "startColumn": 532889,
+                  "endColumn": 532903
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13666,
+                            "endLine": 13666,
+                            "startColumn": 532889,
+                            "endColumn": 532903
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13670,
+                  "endLine": 13670,
+                  "startColumn": 532994,
+                  "endColumn": 533029
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13670,
+                            "endLine": 13670,
+                            "startColumn": 532994,
+                            "endColumn": 533029
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13484,
+                  "endLine": 13484,
+                  "startColumn": 527877,
+                  "endColumn": 527893
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13484,
+                            "endLine": 13484,
+                            "startColumn": 527877,
+                            "endColumn": 527893
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13291,
+                  "endLine": 13291,
+                  "startColumn": 522027,
+                  "endColumn": 522053
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13291,
+                            "endLine": 13291,
+                            "startColumn": 522027,
+                            "endColumn": 522053
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13293,
+                  "endLine": 13293,
+                  "startColumn": 522074,
+                  "endColumn": 522088
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13293,
+                            "endLine": 13293,
+                            "startColumn": 522074,
+                            "endColumn": 522088
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13488,
+                  "endLine": 13488,
+                  "startColumn": 527947,
+                  "endColumn": 528069
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13488,
+                            "endLine": 13488,
+                            "startColumn": 527947,
+                            "endColumn": 528069
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13530,
+                  "endLine": 13530,
+                  "startColumn": 529356,
+                  "endColumn": 529376
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13530,
+                            "endLine": 13530,
+                            "startColumn": 529356,
+                            "endColumn": 529376
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13274,
+                  "endLine": 13274,
+                  "startColumn": 521593,
+                  "endColumn": 521612
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13274,
+                            "endLine": 13274,
+                            "startColumn": 521593,
+                            "endColumn": 521612
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13541,
+                  "endLine": 13541,
+                  "startColumn": 529524,
+                  "endColumn": 529538
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13541,
+                            "endLine": 13541,
+                            "startColumn": 529524,
+                            "endColumn": 529538
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13561,
+                  "endLine": 13561,
+                  "startColumn": 530029,
+                  "endColumn": 530057
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13561,
+                            "endLine": 13561,
+                            "startColumn": 530029,
+                            "endColumn": 530057
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13434,
+                  "endLine": 13434,
+                  "startColumn": 525861,
+                  "endColumn": 525900
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13434,
+                            "endLine": 13434,
+                            "startColumn": 525861,
+                            "endColumn": 525900
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13436,
+                  "endLine": 13436,
+                  "startColumn": 525922,
+                  "endColumn": 525936
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13436,
+                            "endLine": 13436,
+                            "startColumn": 525922,
+                            "endColumn": 525936
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13565,
+                  "endLine": 13565,
+                  "startColumn": 530141,
+                  "endColumn": 530217
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13565,
+                            "endLine": 13565,
+                            "startColumn": 530141,
+                            "endColumn": 530217
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11447,
+                  "endLine": 11447,
+                  "startColumn": 455784,
+                  "endColumn": 455808
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11447,
+                            "endLine": 11447,
+                            "startColumn": 455784,
+                            "endColumn": 455808
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 10911,
+                  "endLine": 10911,
+                  "startColumn": 439772,
+                  "endColumn": 439832
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 10911,
+                            "endLine": 10911,
+                            "startColumn": 439772,
+                            "endColumn": 439832
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11151,
+                  "endLine": 11151,
+                  "startColumn": 446478,
+                  "endColumn": 446496
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11151,
+                            "endLine": 11151,
+                            "startColumn": 446478,
+                            "endColumn": 446496
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11518,
+                  "endLine": 11518,
+                  "startColumn": 458252,
+                  "endColumn": 458274
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11518,
+                            "endLine": 11518,
+                            "startColumn": 458252,
+                            "endColumn": 458274
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 12530,
+                  "endLine": 12530,
+                  "startColumn": 496040,
+                  "endColumn": 496055
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 12530,
+                            "endLine": 12530,
+                            "startColumn": 496040,
+                            "endColumn": 496055
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13196,
+                  "endLine": 13196,
+                  "startColumn": 519510,
+                  "endColumn": 519535
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13196,
+                            "endLine": 13196,
+                            "startColumn": 519510,
+                            "endColumn": 519535
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 12989,
+                  "endLine": 12989,
+                  "startColumn": 514415,
+                  "endColumn": 514429
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 12989,
+                            "endLine": 12989,
+                            "startColumn": 514415,
+                            "endColumn": 514429
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13202,
+                  "endLine": 13202,
+                  "startColumn": 519627,
+                  "endColumn": 519641
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13202,
+                            "endLine": 13202,
+                            "startColumn": 519627,
+                            "endColumn": 519641
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11153,
+                  "endLine": 11153,
+                  "startColumn": 446541,
+                  "endColumn": 446563
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11153,
+                            "endLine": 11153,
+                            "startColumn": 446541,
+                            "endColumn": 446563
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13714,
+                  "endLine": 13714,
+                  "startColumn": 534105,
+                  "endColumn": 534128
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13714,
+                            "endLine": 13714,
+                            "startColumn": 534105,
+                            "endColumn": 534128
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 10186,
+                  "endLine": 10186,
+                  "startColumn": 413764,
+                  "endColumn": 413800
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 10186,
+                            "endLine": 10186,
+                            "startColumn": 413764,
+                            "endColumn": 413800
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13716,
+                  "endLine": 13716,
+                  "startColumn": 534150,
+                  "endColumn": 534164
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13716,
+                            "endLine": 13716,
+                            "startColumn": 534150,
+                            "endColumn": 534164
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13720,
+                  "endLine": 13720,
+                  "startColumn": 534247,
+                  "endColumn": 534270
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13720,
+                            "endLine": 13720,
+                            "startColumn": 534247,
+                            "endColumn": 534270
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11468,
+                  "endLine": 11468,
+                  "startColumn": 456596,
+                  "endColumn": 456615
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11468,
+                            "endLine": 11468,
+                            "startColumn": 456596,
+                            "endColumn": 456615
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11414,
+                  "endLine": 11414,
+                  "startColumn": 454536,
+                  "endColumn": 454564
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11414,
+                            "endLine": 11414,
+                            "startColumn": 454536,
+                            "endColumn": 454564
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11601,
+                  "endLine": 11601,
+                  "startColumn": 461323,
+                  "endColumn": 461347
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11601,
+                            "endLine": 11601,
+                            "startColumn": 461323,
+                            "endColumn": 461347
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 13699,
+                  "endLine": 13699,
+                  "startColumn": 533683,
+                  "endColumn": 533716
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 13699,
+                            "endLine": 13699,
+                            "startColumn": 533683,
+                            "endColumn": 533716
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11440,
+                  "endLine": 11440,
+                  "startColumn": 455494,
+                  "endColumn": 455508
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11440,
+                            "endLine": 11440,
+                            "startColumn": 455494,
+                            "endColumn": 455508
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 10867,
+                  "endLine": 10867,
+                  "startColumn": 438536,
+                  "endColumn": 438551
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 10867,
+                            "endLine": 10867,
+                            "startColumn": 438536,
+                            "endColumn": 438551
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 10869,
+                  "endLine": 10869,
+                  "startColumn": 438569,
+                  "endColumn": 438599
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 10869,
+                            "endLine": 10869,
+                            "startColumn": 438569,
+                            "endColumn": 438599
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11569,
+                  "endLine": 11569,
+                  "startColumn": 459973,
+                  "endColumn": 459997
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11569,
+                            "endLine": 11569,
+                            "startColumn": 459973,
+                            "endColumn": 459997
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 10871,
+                  "endLine": 10871,
+                  "startColumn": 438618,
+                  "endColumn": 438650
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 10871,
+                            "endLine": 10871,
+                            "startColumn": 438618,
+                            "endColumn": 438650
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 10833,
+                  "endLine": 10833,
+                  "startColumn": 437741,
+                  "endColumn": 437790
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 10833,
+                            "endLine": 10833,
+                            "startColumn": 437741,
+                            "endColumn": 437790
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 11549,
+                  "endLine": 11549,
+                  "startColumn": 459314,
+                  "endColumn": 459330
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 11549,
+                            "endLine": 11549,
+                            "startColumn": 459314,
+                            "endColumn": 459330
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 10850,
+                  "endLine": 10850,
+                  "startColumn": 438111,
+                  "endColumn": 438136
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 10850,
+                            "endLine": 10850,
+                            "startColumn": 438111,
+                            "endColumn": 438136
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "",
+          "message": {
+            "text": "Example error trace converted from GraphML"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "./cil.i"
+                },
+                "region": {
+                  "startLine": 10816,
+                  "endLine": 10816,
+                  "startColumn": 437328,
+                  "endColumn": 437345
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "./cil.i"
+                          },
+                          "region": {
+                            "startLine": 10816,
+                            "endLine": 10816,
+                            "startColumn": 437328,
+                            "endColumn": 437345
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
-      ],
-      "columnKind": "utf16CodeUnits"
+      ]
     }
   ]
 }

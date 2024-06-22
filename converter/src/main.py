@@ -86,12 +86,14 @@ def convert_to_sarif(nodes, edges, specification=None):
 
     for source, target, data in edges:
 
+        rule_id = ""
+
         if 'specification' in data:
             new_specification = data['specification']
             new_formula = re.search(r'LTL\((.*?)\)', new_specification).group(1)
-            rule_id = specification_map[formula]["id"],
+            rule_id = specification_map[new_formula]["id"],
             short_description = new_specification
-            full_description = specification_map[formula]["desc"]
+            full_description = specification_map[new_formula]["desc"]
 
             new_rule = {
                 "id": rule_id,
@@ -191,7 +193,7 @@ def main():
     parser.add_argument('specification', nargs='?', default=None, help='Optional dependencies')
     
     args = parser.parse_args()
-    graphml_file = '../package/witness.graphml'
+    graphml_file = 'converter/package/witness.graphml'
     nodes, edges = parse_graphml(graphml_file)
     sarif_data = convert_to_sarif(nodes, edges, args.specification)
     
