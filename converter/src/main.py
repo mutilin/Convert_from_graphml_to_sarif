@@ -109,38 +109,23 @@ def convert_to_sarif(nodes, edges, specification=None):
             if new_rule not in runs["tool"]["driver"]["rules"]:
                 runs["tool"]["driver"]["rules"].append(new_rule)
 
-        if 'assumption' in data:
-            assumption = data['assumption']
-            locations.append({
-                "physicalLocation": {
-                    "artifactLocation": {
-                        "uri": data.get('originfile')
-                    },
-                    "region": {
-                        "startLine": int(data.get('startline', 0)),
-                        "endLine": int(data.get('endline', 0)),
-                        "startColumn": int(data.get('startoffset', 0)),
-                        "endColumn": int(data.get('endoffset', 0)),
-                    },
-                    "message": {
-                        "text": assumption
-                    }
+        assumption = data.get('assumption', '')
+        locations.append({
+            "physicalLocation": {
+                "artifactLocation": {
+                    "uri": data.get('originfile')
+                },
+                "region": {
+                    "startLine": int(data.get('startline', 0)),
+                    "endLine": int(data.get('endline', 0)),
+                    "startColumn": int(data.get('startoffset', 0)),
+                    "endColumn": int(data.get('endoffset', 0)),
+                },
+                "message": {
+                    "text": assumption
                 }
-            })
-        else:
-            locations.append({
-                "physicalLocation": {
-                    "artifactLocation": {
-                        "uri": data.get('originfile')
-                    },
-                    "region": {
-                        "startLine": int(data.get('startline', 0)),
-                        "endLine": int(data.get('endline', 0)),
-                        "startColumn": int(data.get('startoffset', 0)),
-                        "endColumn": int(data.get('endoffset', 0)),
-                    }
-                }
-            })
+            }
+        })
 
         thread_flows = []
         thread_flows.append({
@@ -159,10 +144,6 @@ def convert_to_sarif(nodes, edges, specification=None):
                             }
                         }
                     },
-                    "threadFlowLocation": {
-                        "kinds": ["function"] if 'enterFunction' in data else [],
-                        "executionOrder": int(data.get('executionOrder', 0))
-                    }
                 }
             ]
         })
