@@ -120,9 +120,6 @@ def convert_to_sarif(nodes, edges, specification=None):
                     "endLine": int(data.get('endline', 0)),
                     "startColumn": int(data.get('startoffset', 0)),
                     "endColumn": int(data.get('endoffset', 0)),
-                },
-                "message": {
-                    "text": assumption
                 }
             }
         })
