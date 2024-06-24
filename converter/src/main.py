@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 import json
 import argparse
 import re
+import sys
 
 specification_map = {"G ! call(func())" : {"id": "RO1", "desc" : "The function 'func' is not called in any finite execution of the program."}, 
                      "G valid-free" : {"id": "RO2", "desc" : "All memory deallocations are valid (counterexample: invalid free). More precisely: There exists no finite execution of the program on which an invalid memory deallocation occurs."}, 
@@ -11,6 +12,42 @@ specification_map = {"G ! call(func())" : {"id": "RO1", "desc" : "The function '
                      "G ! overflow" : {"id": "RO6", "desc" : "It can never happen that the resulting type of an operation is a signed integer type but the resulting value is not in the range of values that are representable by that type."},
                      "G ! data-race" : {"id": "RO7", "desc" : "If there exist two or more concurrent accesses to the same memory location and at least one is a write access, then all accesses must be atomic."},
                      "F end" : {"id": "RO0", "desc" : "Every path finally reaches the end of the program. The proposition 'end' is true at the end of every finite program execution (exit, abort, return from the initial call of main, etc.). A counterexample for this property is an infinite program execution."}}
+
+def dfs_find_path(entry_node, nodes, edges, all_edges, violation_node):
+    stack = [entry_node]
+    visited = set()
+    parent = {entry_node: None}
+
+    while stack:
+        node = stack.pop()
+
+        # Если нашли конечную вершину, восстановим путь
+        if node == violation_node:
+            path = []
+            while node is not None:
+                path.append(node)
+                node = parent[node]
+            path.reverse()
+            break
+
+        # Если вершина еще не была посещена
+        if node not in visited:
+            visited.add(node)
+
+            # Добавление соседних вершин в стек
+            for target, data in edges[node]:
+                if target not in visited and "sink" not in nodes[target]:
+                    stack.append(target)
+                    parent[target] = node
+    
+    graph_edges = {}
+    for source, target, data in all_edges:
+        if source not in graph_edges and source in path:
+            graph_edges[source] = []
+        index = path.index(source)
+        if target == path[index + 1]:
+            graph_edges[source].append((target, data))
+    return path, graph_edges
 
 def parse_graphml(graphml_file):
     tree = ET.parse(graphml_file)
@@ -39,12 +76,6 @@ def parse_graphml(graphml_file):
             data[key] = value
         edges.append((source, target, data))
 
-    with open("edges", 'w') as edges_file:
-        edges_file.write(str(edges))
-    with open("nodes.txt", 'w') as nodes_file:
-        nodes_file.write(str(nodes))
-    
-    return nodes, edges
 
 def convert_to_sarif(nodes, edges, specification=None):
     runs = []
@@ -74,91 +105,156 @@ def convert_to_sarif(nodes, edges, specification=None):
                 }           
         }
 
-        if new_rule not in runs["tool"]["driver"]["rules"]:
-            runs["tool"]["driver"]["rules"].append(new_rule)
+        if new_rule not in runs[0]["tool"]["driver"]["rules"]:
+            runs[0]["tool"]["driver"]["rules"].append(new_rule)
 
+    entry_node = None
+    violation_node = None
+    visited = {}
+    graph_edges = {}
+    for source, target, data in edges:
+        if source not in graph_edges:
+            graph_edges[source] = []
+        graph_edges[source].append((target, data))
+    with open("gedges", 'w') as gedges_file:
+        for src, data in graph_edges.items():
+            gedges_file.write(src + " " + str(data[0]) + "\n")
     for node_id, node_data in nodes.items():
-        node_type = node_data.get('type')
-        if node_type == 'entry':
+        visited[node_id] = False
+        node_type_e = node_data.get('entry')
+        if node_type_e == 'true':
             entry_node = node_id
-        elif node_type == 'violation':
+        node_type_v = node_data.get('violation')
+        if node_type_v == 'true':
             violation_node = node_id
 
-    for source, target, data in edges:
-        locations = []
+    path, graph_edges = dfs_find_path(entry_node=entry_node, nodes=nodes, edges=graph_edges, all_edges=edges, violation_node=violation_node)
+    stacks = []
+    stacks_node = []
+    thread_flows = []
+    locations = []
 
-        rule_id = ""
-
-        if 'specification' in data:
-            new_specification = data['specification']
-            new_formula = re.search(r'LTL\((.*?)\)', new_specification).group(1)
-            rule_id = specification_map[new_formula]["id"],
-            short_description = new_specification
-            full_description = specification_map[new_formula]["desc"]
-
-            new_rule = {
-                "id": rule_id,
-                "shortDescription": {
-                    "text": short_description
-                },
-                "fullDescription": {
-                    "text": full_description
-                }
-            }
-
-            if new_rule not in runs["tool"]["driver"]["rules"]:
-                runs["tool"]["driver"]["rules"].append(new_rule)
-
-        assumption = data.get('assumption', '')
-        locations.append({
-            "physicalLocation": {
-                "artifactLocation": {
-                    "uri": data.get('originfile')
-                },
-                "region": {
-                    "startLine": int(data.get('startline', 0)),
-                    "endLine": int(data.get('endline', 0)),
-                    "startColumn": int(data.get('startoffset', 0)),
-                    "endColumn": int(data.get('endoffset', 0)),
-                }
-            }
-        })
-
-        thread_flows = []
-        thread_flows.append({
-            "locations": [
-                {
-                    "location": {
-                        "physicalLocation": {
-                            "artifactLocation": {
-                                "uri": data.get('originfile')
-                            },
-                            "region": {
-                                "startLine": int(data.get('startline', 0)),
-                                "endLine": int(data.get('endline', 0)),
-                                "startColumn": int(data.get('startoffset', 0)),
-                                "endColumn": int(data.get('endoffset', 0)),
-                            }
-                        }
+    codeFlows_json = [{
+        "message" : {
+            "text" : "Path to error"
+        },
+        "threadFlows": [{
+            "locations" : []
+        }]
+    }]
+    for current_node in path:
+        if current_node == violation_node:
+            locations.append({
+                "physicalLocation": {
+                    "artifactLocation": {
+                        "uri": data.get('originfile')
                     },
-                }
-            ]
-        })
-        #sarif['runs'][0]['results']['codeFlows'][0]['threadFlows'][0]['locations'].append(thread_flow_location)
-
-        for run in runs:
-            run["results"].append({
-                "ruleId": rule_id,
-                "message": {
-                    "text": "Example error trace converted from GraphML"
-                },
-                "locations": locations,
-                "codeFlows": [
-                    {
-                        "threadFlows": thread_flows
+                    "region": {
+                        "startLine": int(data.get('startline', 0)),
+                        "endLine": int(data.get('endline', 0)),
+                        "startColumn": int(data.get('startoffset', 0)),
+                        "endColumn": int(data.get('endoffset', 0)),
                     }
-                ]
+                }
             })
+        else:
+            data = graph_edges[current_node][0][1]
+
+
+            if 'enterFunction' in data:
+                stacks_node.append(current_node)
+            elif 'returnFrom' in data:
+                stacks_node.pop()
+
+            if parametr_rule_id:
+                rule_id = parametr_rule_id
+            else:
+                rule_id = ""
+
+            if 'specification' in data:
+                new_specification = data['specification']
+                new_formula = re.search(r'LTL\((.*?)\)', new_specification).group(1)
+                rule_id = specification_map[new_formula]["id"],
+                short_description = new_specification
+                full_description = specification_map[new_formula]["desc"]
+
+                new_rule = {
+                    "id": rule_id,
+                    "shortDescription": {
+                        "text": short_description
+                    },
+                    "fullDescription": {
+                        "text": full_description
+                    }
+                }
+
+                if new_rule not in runs["tool"]["driver"]["rules"]:
+                    runs["tool"]["driver"]["rules"].append(new_rule)
+
+            assumption = data.get('assumption', '')
+            codeFlows_json[0]["threadFlows"][0]["locations"].append({
+                        "location": {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": data.get('originfile')
+                                },
+                                "region": {
+                                    "startLine": int(data.get('startline', 0)),
+                                    "endLine": int(data.get('endline', 0)),
+                                    #"startColumn": int(data.get('startoffset', 0)),
+                                    "endColumn": int(data.get('endoffset', 0)),
+                                }
+                            },
+                            "message": {
+                                "text": data.get('sourcecode', "")
+                            }
+                        },
+            })
+            #sarif['runs'][0]['results']['codeFlows'][0]['threadFlows'][0]['locations'].append(thread_flow_location)
+
+    stacks_json = {
+        "message": {
+            "text" : "Resulting call stack"
+        },
+        "frames": []
+    }
+    stacks_node.reverse()
+    for node in stacks_node:
+        stacks_json["frames"].append({
+            "location" : {
+                "physicalLocation" : {
+                    "artifactLocation" : {
+                        "uri" : graph_edges[node][0][1].get('originfile')
+                    },
+                    "region" : {
+                        "startLine": int(graph_edges[node][0][1].get('startline', 0)),
+                        "startColumn": int(graph_edges[node][0][1].get('startoffset', 0))
+                    }
+                },
+                "logicalLocations": [
+                      {
+                        "fullyQualifiedName": graph_edges[node][0][1].get('enterFunction', "")
+                      }
+                ]
+            },
+            "threadId" : int(data.get('threadId', 0))
+        })
+
+    stacks.append(stacks_json)
+    for run in runs:
+        run["results"].append({
+            "ruleId": rule_id,
+            "message": {
+                "text": "Example error trace converted from GraphML"
+            },
+            "locations": locations,
+            "stacks" : stacks,
+            "codeFlows": codeFlows_json
+        })
+    with open("funcedges", 'w') as funcedges_file:
+        for src, data in graph_edges.items():
+            if src in stacks:
+                funcedges_file.write(src + " " + str(data[0]) + "\n")
 
     sarif_log = {
         "version": "2.1.0",
@@ -172,11 +268,14 @@ def main():
     parser.add_argument('specification', nargs='?', default=None, help='Optional dependencies')
     
     args = parser.parse_args()
-    graphml_file = 'converter/package/witness.graphml'
-    nodes, edges = parse_graphml(graphml_file)
+    graphml_file1 = 'converter/package/test1/witness1.graphml'
+    graphml_file2 = 'converter/package/test2/witness2.graphml'
+    graphml_file3 = 'converter/package/test3/witness3.graphml'
+    graphml_file4 = 'converter/package/test3/witness3.graphml'
+    nodes, edges = parse_graphml(graphml_file1)
     sarif_data = convert_to_sarif(nodes, edges, args.specification)
     
-    with open('result.sarif', 'w') as sarif_file:
+    with open('converter/package/test1/result.sarif', 'w') as sarif_file:
         json.dump(sarif_data, sarif_file, indent=2)
 
 if __name__ == "__main__":
